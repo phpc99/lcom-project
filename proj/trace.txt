@@ -1,0 +1,44 @@
+@lcflib.a:2019, lcf_start
+  proj_main_loop(argc, argv)
+> proj_main_loop(0, [NULL])
+  @/home/lcom/labs/proj/src/Controller/VBE/GPU.c:41, vg_map
+    vbe_get_mode_info(mode, &mode_info)
+  > vbe_get_mode_info(0x115, addr: 0x824d0d0)
+  < vbe_get_mode_info(0x115, addr: 0x824d0d0 [0xe0000000, 800x600, 8:8:8 (24) <1.37329 MiB>]) -> (ret: 0)
+  @/home/lcom/labs/proj/src/Controller/VBE/GPU.c:61, vg_map
+    sys_privctl(SELF, SYS_PRIV_ADD_MEM, &mr)
+  > sys_privctl(SELF, SYS_PRIV_ADD_MEM, addr: 0xeffff728 [0xe0000000 - 0xe015f900 <1.37329 MiB>])
+  < sys_privctl(SELF, SYS_PRIV_ADD_MEM, &mr) -> (ret: 0)
+  @/home/lcom/labs/proj/src/Controller/VBE/GPU.c:66, vg_map
+    vm_map_phys(SELF, (void *)mr.mr_base, vram_size)
+  < vm_map_phys(SELF, addr: 0xe0000000, 1.37329 MiB) -> (ret: 0xef89b000)
+  @/home/lcom/labs/proj/src/Controller/VBE/GPU.c:26, VG_init
+    sys_int86(&r86)
+  > sys_int86(addr: 0xeffff700 [AX: 4f02, BX: 4115, CX: 0000, DX: 0000, ES: 0000, DI: 0000])
+  < sys_int86(addr: 0xeffff700 [AX: 004f, BX: 4115, CX: 0000, DX: 0000, ES: 0000, DI: 0000]) -> (ret: 0)
+  @/home/lcom/labs/proj/src/main.c:51, proj_main_loop
+    timer_subscribe_int(&bit_no_timer)
+  > timer_subscribe_int(addr: 0xeffff75f [8])
+    @/home/lcom/labs/proj/src/Controller/Timer/timer.c:54, timer_subscribe_int
+      sys_irqsetpolicy(TIMER0_IRQ, IRQ_REENABLE, &hook_id_TIMER)
+    > sys_irqsetpolicy(0, 1, addr: 0x8231304 [0])
+    < sys_irqsetpolicy(0, 1, addr: 0x8231304 [10]) -> (ret: 0)
+  < timer_subscribe_int(addr: 0xeffff75f [0]) -> (ret: 0)
+  @/home/lcom/labs/proj/src/Controller/Mouse_Keyboard/keyboard.c:15, keyboard_subscribe_int
+    sys_irqsetpolicy(KEYBOARD_IRQ, (IRQ_REENABLE | IRQ_EXCLUSIVE), &hook_id_keyboard)
+  > sys_irqsetpolicy(1, 3, addr: 0x8230660 [1])
+  < sys_irqsetpolicy(1, 3, addr: 0x8230660 [11]) -> (ret: 0)
+  @/home/lcom/labs/proj/src/Controller/Mouse_Keyboard/mouse.c:23, mouse_subscribe_int
+    sys_irqsetpolicy(MOUSE_IRQ, (IRQ_REENABLE | IRQ_EXCLUSIVE), &hook_id_mouse)
+  > sys_irqsetpolicy(12, 3, addr: 0x823066c [12])
+  < sys_irqsetpolicy(12, 3, addr: 0x823066c [12]) -> (ret: 0)
+  @/home/lcom/labs/proj/src/GUI/bitmap.c:90, bitmap_load
+    printf("Error opening file %s\n", path)
+    "Error opening file /home/lcom/labs/grupo_2leic05_6/proj/src/assets/menu_background/menu_background_32.bmp"
+  @/home/lcom/labs/proj/src/GUI/gui.c:9, setup_sprites
+    printf("Error loading menuBackground\n")
+    "Error loading menuBackground"
+  @/home/lcom/labs/proj/src/main.c:60, proj_main_loop
+    driver_receive(ANY, &msg, &ipc_status)
+  > driver_receive(ANY, addr: 0xeffff760, addr: 0xeffff7a8)
+  < driver_receive(<[HARDWARE: 0b0000000000000000000000000000000000000000000000000000000000000001]>)

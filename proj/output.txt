@@ -1,0 +1,2 @@
+Error opening file /home/lcom/labs/grupo_2leic05_6/proj/src/assets/menu_background/menu_background_32.bmp
+Error loading menuBackground
