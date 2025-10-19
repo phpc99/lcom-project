@@ -10,7 +10,9 @@
 - Managed game loop and frame timing to ensure smooth and responsive gameplay;
 - Focused on modular design, separating logic for graphics, input, and game state management.
 
-# Screenshots
+# Video
+
+https://github.com/phpc99/lcom-project/blob/main/Terraria_Lite.mp4
 
 # Authors
 
